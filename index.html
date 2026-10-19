@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guyub Ngapak · Sistem Desain</title>
+<style>
+:root{
+  --green:#2A4A32; --gold:#E0A639; --cream:#F7F3E8; --ink:#1F3426; --paper:#FFFFFF;
+  --line:#D8D0BC; --muted:#5E6F63; --wa:#25D366; --wa-ink:#0F1F14; --wa-dark:#1F6B3A;
+  --red:#B3261E; --focus:#E0A639; --radius-card:12px; --radius-chip:6px;
+  color-scheme: light;
+}
+[data-theme="dark"]{
+  --green:#2A4A32; --gold:#E0A639; --cream:#15211A; --ink:#EDE8DA; --paper:#1D2B22; --line:#3A4D40; --muted:#A9B8AD;
+  --wa-dark:#2E8B4E; --red:#F28B82; --focus:#F2C46B; color-scheme: dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#15211A; --ink:#EDE8DA; --paper:#1D2B22; --line:#3A4D40; --muted:#A9B8AD;
+    --wa-dark:#2E8B4E; --red:#F28B82; --focus:#F2C46B; color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:Cambria,Georgia,serif;margin:0;color:var(--ink)}
+h2{font-size:28px;margin:48px 0 8px;color:var(--green)}
+[data-theme="dark"] h2, :root:not([data-theme="light"]) h2{color:var(--gold)}
+.lead{color:var(--muted);margin:0 0 20px;max-width:760px}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-card);padding:20px}
+.label{font-size:13px;color:var(--muted);margin-bottom:10px;display:block}
+.sketch{border:1.5px dashed #9AA89D;border-radius:var(--radius-card);padding:16px;background:repeating-linear-gradient(0deg,transparent 0 23px,#E4DDCB 23px 24px)}
+.toggle{position:fixed;top:16px;right:16px;z-index:9;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer;font:inherit}
+.toggle:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* logo */
+.logo-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.wordmark{font-family:Cambria,Georgia,serif;font-size:34px;font-weight:700;color:var(--green)}
+[data-theme="dark"] .wordmark, :root:not([data-theme="light"]) .wordmark{color:var(--gold)}
+.wordmark small{display:block;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.04em}
+.logo-dark{background:var(--green);border-radius:var(--radius-card);padding:20px;display:flex;align-items:center;gap:16px}
+.logo-dark .wordmark{color:#fff}.logo-dark .wordmark small{color:#CFE0D3}
+
+/* palet */
+.swatch{border-radius:var(--radius-card);overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.swatch div{height:72px}
+.swatch p{margin:0;padding:10px 12px;font-size:13px}
+.swatch b{display:block;font-size:14px}
+
+/* tipografi */
+.type-sample{margin:0 0 14px}
+.t-display{font-family:Cambria,Georgia,serif;font-size:44px;font-weight:700}
+.t-h1{font-family:Cambria,Georgia,serif;font-size:32px;font-weight:700}
+.t-h2{font-family:Cambria,Georgia,serif;font-size:24px;font-weight:700}
+.t-body{font-size:16px}
+.t-small{font-size:13px;color:var(--muted)}
+
+/* ikon */
+.icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
+.icon-cell{border:1px solid var(--line);border-radius:var(--radius-card);padding:14px 8px;text-align:center;background:var(--paper);font-size:12px;color:var(--muted)}
+.icon-cell svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;margin:0 auto 8px}
+[data-theme="dark"] .icon-cell svg, :root:not([data-theme="light"]) .icon-cell svg{stroke:var(--gold)}
+
+/* tombol */
+.btn{font:inherit;font-weight:700;border-radius:999px;padding:10px 20px;border:1.5px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-secondary{background:transparent;color:var(--green);border-color:var(--green)}
+[data-theme="dark"] .btn-secondary, :root:not([data-theme="light"]) .btn-secondary{color:var(--gold);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--ink);padding:8px 12px}
+.btn-icon{width:40px;height:40px;padding:0;justify-content:center;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* form */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-weight:700;font-size:14px}
+.req{color:var(--red);margin-left:3px;font-weight:700;aria-hidden:true}
+.input{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:var(--radius-chip);background:var(--paper);color:var(--ink);width:100%}
+.input-prefix{display:flex;align-items:stretch}
+.input-prefix span{display:flex;align-items:center;padding:0 12px;border:1.5px solid var(--line);border-right:0;border-radius:var(--radius-chip) 0 0 var(--radius-chip);background:var(--cream);font-weight:700;color:var(--ink)}
+.input-prefix .input{border-radius:0 var(--radius-chip) var(--radius-chip) 0}
+.counter{font-size:12px;color:var(--muted);align-self:flex-end}
+.err{color:var(--red);font-size:13px}
+.legend{font-size:13px;color:var(--muted)}
+.legend .req{margin:0}
+
+/* kartu, chip, badge */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-card);padding:16px;transition:border-color .2s}
+.card:hover{border-color:var(--gold)}
+.chip{display:inline-block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:var(--radius-chip);padding:3px 8px;background:transparent;color:var(--ink)}
+.chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+.currency{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:700}
+.currency img{width:16px;height:16px}
+.tag-sorot{position:absolute;top:10px;left:10px;background:var(--gold);color:#1F1A0A;font-size:11px;font-weight:700;border-radius:var(--radius-chip);padding:2px 8px}
+
+/* bingkai avatar */
+.avatar-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-family:Cambria,Georgia,serif;font-weight:700;font-size:22px;color:var(--green);position:relative}
+[data-theme="dark"] .avatar, :root:not([data-theme="light"]) .avatar{color:var(--gold)}
+.frame-gold{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--gold)}
+.frame-green{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--green)}
+.frame-dash{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--muted);outline:2px dashed var(--gold);outline-offset:6px}
+.frame-ring{background:conic-gradient(var(--gold),var(--green),var(--gold));padding:3px}
+.frame-ring .avatar{width:100%;height:100%}
+.frame-ring-wrap{width:70px;height:70px;border-radius:50%}
+
+/* whatsapp */
+.wa-btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font:inherit;font-weight:700;border:0;cursor:pointer;background:var(--wa);color:var(--wa-ink)}
+.wa-btn svg{width:18px;height:18px;fill:currentColor}
+[data-theme="dark"] .wa-btn, :root:not([data-theme="light"]) .wa-btn{background:var(--wa-dark);color:#fff}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .wa-btn{background:var(--wa-dark);color:#fff} }
+
+/* banner, toast, tab, step */
+.banner{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:var(--radius-card);padding:12px 16px;font-size:14px}
+.toast{background:var(--ink);color:var(--cream);border-radius:var(--radius-card);padding:12px 16px;display:inline-block;font-size:14px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:10px 14px;border:0;background:none;font:inherit;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--green);border-bottom-color:var(--gold);font-weight:700}
+[data-theme="dark"] .tab[aria-selected="true"], :root:not([data-theme="light"]) .tab[aria-selected="true"]{color:var(--gold)}
+.steps{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:24px}
+.dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--green);background:transparent;transition:background .3s}
+.dot.on{background:var(--green)}
+.onboard{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--paper);padding:24px}
+.onboard .back{position:absolute;top:14px;left:14px}
+.rate{display:inline-flex;gap:4px}
+.rate span{color:var(--gold);font-size:22px}
+.rate span.off{color:var(--line)}
+.role{border:1.5px solid var(--line);border-radius:var(--radius-card);padding:18px;background:var(--paper)}
+.role.sel{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.role ul{padding-left:18px;margin:8px 0 0}
+
+/* sketsa wireframe */
+.wf{display:grid;gap:8px}
+.wf-bar{height:28px;border:1.5px solid #9AA89D;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:11px;color:var(--muted);gap:10px}
+.wf-block{border:1.5px solid #9AA89D;border-radius:4px;padding:8px;font-size:11px;color:var(--muted);min-height:50px}
+.wf-row{display:grid;gap:8px;grid-template-columns:1fr 2fr}
+.wf-x{border-style:dashed}
+
+/* animasi */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.anim-rise{animation:rise .6s ease both}
+.anim-pulse{animation:pulse 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){ .anim-rise,.anim-pulse{animation:none} }
+.replay{margin-top:10px}
+</style>
+</head>
+<body>
+<button class="toggle" id="themeBtn" aria-label="Ganti tema terang dan gelap">Tema: otomatis</button>
+
+<div class="wrap">
+  <span class="tag">Guyub Ngapak · Sistem Desain v1</span>
+  <h1 class="t-display" style="margin-top:8px">Sketsa dan desain akhir</h1>
+  <p class="lead">Semua nilai warna, font, dan komponen mengikuti proyek. Bagian bertanda Sketsa adalah tata letak awal, bagian lain adalah desain akhir yang siap disalin ke kode.</p>
+
+  <h2>1. Logo</h2>
+  <div class="grid g2">
+    <div class="box">
+      <span class="label">Versi terang</span>
+      <div class="logo-wrap">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="28" cy="28" r="26" fill="#2A4A32"/>
+          <path d="M16 36 Q28 14 40 36" stroke="#E0A639" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="16" cy="36" r="3.5" fill="#E0A639"/><circle cx="28" cy="22" r="3.5" fill="#E0A639"/><circle cx="40" cy="36" r="3.5" fill="#E0A639"/>
+        </svg>
+        <div class="wordmark">Guyub Ngapak<small>Alus settinge. Kepenak ngodene.</small></div>
+      </div>
+    </div>
+    <div class="logo-dark">
+      <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+        <circle cx="28" cy="28" r="26" fill="#E0A639"/>
+        <path d="M16 36 Q28 14 40 36" stroke="#2A4A32" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="16" cy="36" r="3.5" fill="#2A4A32"/><circle cx="28" cy="22" r="3.5" fill="#2A4A32"/><circle cx="40" cy="36" r="3.5" fill="#2A4A32"/>
+      </svg>
+      <div class="wordmark">Guyub Ngapak<small>Alus settinge. Kepenak ngodene.</small></div>
+    </div>
+  </div>
+  <p class="hint">Simbol: tiga titik di bawah busur melambangkan tiga pihak yang saling menyambung (warga, pelajar, penggerak). Ikon ukuran kecil (16 px) memakai simbol tanpa wordmark.</p>
+
+  <h2>2. Skema warna</h2>
+  <div class="grid g3">
+    <div class="swatch"><div style="background:#2A4A32"></div><p><b>Hijau tua</b>#2A4A32 · utama, tombol</p></div>
+    <div class="swatch"><div style="background:#E0A639"></div><p><b>Emas</b>#E0A639 · aksen, fokus, sorotan</p></div>
+    <div class="swatch"><div style="background:#F7F3E8"></div><p><b>Krem</b>#F7F3E8 · latar</p></div>
+    <div class="swatch"><div style="background:#1F3426"></div><p><b>Tinta</b>#1F3426 · teks</p></div>
+    <div class="swatch"><div style="background:#25D366"></div><p><b>WhatsApp terang</b>#25D366 · tombol WA light</p></div>
+    <div class="swatch"><div style="background:#2E8B4E"></div><p><b>WhatsApp gelap</b>#2E8B4E · tombol WA dark</p></div>
+    <div class="swatch"><div style="background:#B3261E"></div><p><b>Merah bintang</b>#B3261E · tanda wajib, error</p></div>
+    <div class="swatch"><div style="background:#15211A"></div><p><b>Latar gelap</b>#15211A · mode gelap</p></div>
+  </div>
+  <p class="hint">Teks di atas krem dan latar terang memakai tinta atau hijau tua, dengan kontras minimal 4.5:1. Tombol WhatsApp terang memakai teks gelap, versi gelap memakai teks putih.</p>
+
+  <h2>3. Tipografi</h2>
+  <div class="box">
+    <p class="type-sample t-display">Judul Display</p>
+    <p class="type-sample t-h1">Judul Halaman</p>
+    <p class="type-sample t-h2">Judul Bagian</p>
+    <p class="type-sample t-body">Teks isi. Warga saling bantu, belajar dari kearifan lokal Jawa Tengah.</p>
+    <p class="type-sample t-small">Teks kecil dan keterangan.</p>
+    <p class="t-small">Judul: Cambria, fallback Georgia. Teks isi: Arial, fallback Helvetica. Tidak ada font tambahan yang perlu dimuat.</p>
+  </div>
+
+  <h2>4. Ikon</h2>
+  <p class="lead">Grid 24 px, stroke 2, ujung bulat. Warna mengikuti teks atau hijau tua.</p>
+  <div class="icons">
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Peta</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M4 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg>Pustaka</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>Pensil</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Pesan</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 4l8 15H4z"/></svg>Currency</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>Bintang</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Selesai</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Kembali</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/></svg>Dampak</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>Iklan</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profil</div>
+    <div class="icon-cell"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Unduh</div>
+  </div>
+  <p class="hint">Di proyek, ikon dipakai lewat &lt;img&gt; dengan kelas dark:brightness-0 dark:invert, atau sebagai SVG inline dengan currentColor.</p>
+
+  <h2>5. Tombol dan form</h2>
+  <div class="grid g2">
+    <div class="box">
+      <span class="label">Tombol</span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <button class="btn btn-primary">Ajukan</button>
+        <button class="btn btn-secondary">Batal</button>
+        <button class="btn btn-primary" disabled>Ajukan</button>
+        <button class="btn btn-ghost">Lewati</button>
+        <button class="btn btn-icon" aria-label="Kembali"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      </div>
+      <p class="hint">Tombol nonaktif tetap memberi keterangan di bawahnya, misalnya "Pilih bidang terlebih dahulu."</p>
+    </div>
+    <div class="box">
+      <span class="label">Field wajib dan opsional</span>
+      <div class="field"><label for="f1">Nama<span class="req" aria-hidden="true">*</span></label><input id="f1" class="input" value="Siti"><span class="counter">4/20</span></div>
+      <div class="field"><label for="f2">Nomor WhatsApp</label>
+        <div class="input-prefix"><span>+62</span><input id="f2" class="input" placeholder="8123456789" inputmode="numeric"></div>
+        <span class="hint">Opsional. Dipakai agar orang bisa menghubungimu lewat WhatsApp.</span></div>
+      <div class="field"><label for="f3">Email<span class="req" aria-hidden="true">*</span></label><input id="f3" class="input" value="nama@gmail" aria-invalid="true"><span class="err">Format email belum benar.</span></div>
+      <p class="legend"><span class="req">*</span> wajib diisi</p>
+    </div>
+  </div>
+
+  <h2>6. Kartu, chip, dan badge</h2>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Kartu permintaan</span><h3 style="margin:6px 0">Bantu panen cabai</h3><p class="t-small" style="margin:0 0 10px">Banyumas · Pertanian</p><span class="chip">Foto produk</span> <span class="chip on">Desain</span></div>
+    <div class="card" style="position:relative"><span class="tag-sorot">Sorotan</span><div style="height:90px;background:var(--cream);border-radius:8px;margin-top:14px"></div><h3 style="margin:10px 0 4px;font-size:18px">Desain kemasan UMKM</h3><p class="t-small" style="margin:0">Penggerak · Purbalingga</p></div>
+    <div class="card"><span class="tag">Chip kategori</span><div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px"><span class="chip">Pembukuan</span><span class="chip">Video pendek</span><span class="chip on">Marketplace</span></div></div>
+  </div>
+  <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <span class="currency"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 3l9 16H3z' fill='%23E0A639'/></svg>" alt="">1.250</span>
+    <span class="t-small">Badge currency di navbar, klik membuka toko.</span>
+  </div>
+
+  <h2>7. Ilustrasi</h2>
+  <p class="lead">Ilustrasi dipakai sebagai pendukung visual, bukan informasi utama.</p>
+  <div class="grid g2">
+    <div class="box">
+      <span class="label">a. Bingkai avatar dan toko</span>
+      <div class="avatar-row">
+        <div style="text-align:center"><div class="avatar">S</div><span class="t-small">Tanpa</span></div>
+        <div style="text-align:center"><div class="avatar frame-gold">S</div><span class="t-small">Emas, 50</span></div>
+        <div style="text-align:center"><div class="avatar frame-green">S</div><span class="t-small">Hijau, 150</span></div>
+        <div style="text-align:center"><div class="avatar frame-dash">S</div><span class="t-small">Garis, 300</span></div>
+        <div style="text-align:center"><div class="frame-ring frame-ring-wrap"><div class="avatar">S</div></div><span class="t-small">Cincin, 500</span></div>
+      </div>
+      <p class="hint">Bingkai ditempel di luar foto, tidak menutupi avatar. Pratinjau di toko memakai inisial pengguna 64 px. Angka adalah harga dalam currency.</p>
+      <div style="margin-top:14px;display:grid;gap:8px">
+        <div class="card" style="display:flex;align-items:center;gap:12px"><div class="avatar frame-gold" style="width:44px;height:44px;font-size:16px">S</div><div style="flex:1"><b>Bingkai Emas</b><div class="t-small">50 currency · Dimiliki</div></div><button class="btn btn-secondary" style="padding:6px 14px">Pasang</button></div>
+        <div class="card" style="display:flex;align-items:center;gap:12px"><div class="avatar frame-green" style="width:44px;height:44px;font-size:16px">S</div><div style="flex:1"><b>Bingkai Hijau</b><div class="t-small">150 currency</div></div><button class="btn btn-primary" style="padding:6px 14px">Beli</button></div>
+        <div class="card" style="display:flex;align-items:center;gap:12px;opacity:.6"><div class="avatar frame-ring" style="width:44px;height:44px;font-size:16px">S</div><div style="flex:1"><b>Bingkai Cincin</b><div class="t-small">500 currency · Currency belum cukup</div></div><button class="btn btn-primary" style="padding:6px 14px" disabled>Beli</button></div>
+      </div>
+    </div>
+    <div class="box">
+      <span class="label">b. Latar hitam dan putih dengan arsir miring</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="height:150px;border-radius:8px;border:1px solid var(--line);background:#FFFFFF;background-image:repeating-linear-gradient(45deg,#000 0 1px,transparent 1px 10px)"></div>
+        <div style="height:150px;border-radius:8px;border:1px solid var(--line);background:#000000;background-image:repeating-linear-gradient(45deg,#FFFFFF 0 1px,transparent 1px 10px)"></div>
+      </div>
+      <p class="hint">Latar putih dengan arsir hitam, dan latar hitam dengan arsir putih. Garis 1 px, jarak 10 px, miring 45 derajat. Teks di atas latar arsir harus diberi kotak solid agar tetap terbaca.</p>
+    </div>
+    <div class="box">
+      <span class="label">c. Simbol</span>
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <svg width="16" height="16" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#2A4A32"/><path d="M16 36 Q28 14 40 36" stroke="#E0A639" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="16" cy="36" r="4" fill="#E0A639"/><circle cx="28" cy="22" r="4" fill="#E0A639"/><circle cx="40" cy="36" r="4" fill="#E0A639"/></svg>
+        <svg width="32" height="32" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#2A4A32"/><path d="M16 36 Q28 14 40 36" stroke="#E0A639" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="16" cy="36" r="3.5" fill="#E0A639"/><circle cx="28" cy="22" r="3.5" fill="#E0A639"/><circle cx="40" cy="36" r="3.5" fill="#E0A639"/></svg>
+        <svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#2A4A32"/><path d="M16 36 Q28 14 40 36" stroke="#E0A639" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="16" cy="36" r="3.5" fill="#E0A639"/><circle cx="28" cy="22" r="3.5" fill="#E0A639"/><circle cx="40" cy="36" r="3.5" fill="#E0A639"/></svg>
+      </div>
+      <p class="hint">Simbol tiga titik di bawah busur, dipakai di ukuran 16, 32, dan 56 px. Ikon favicon memakai ukuran 16 dan 32 px.</p>
+    </div>
+    <div class="box">
+      <span class="label">d. Properti (token)</span>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Radius kartu</td><td style="border-bottom:1px solid var(--line)">12 px</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Radius chip</td><td style="border-bottom:1px solid var(--line)">6 px</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Radius tombol</td><td style="border-bottom:1px solid var(--line)">999 px (pil)</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Kelipatan spasi</td><td style="border-bottom:1px solid var(--line)">4 px (4, 8, 12, 16, 20, 24)</td></tr>
+        <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Garis pemisah</td><td style="border-bottom:1px solid var(--line)">1 px</td></tr>
+        <tr><td style="padding:6px 0">Bayangan</td><td>Maksimal shadow-sm, tanpa gradasi</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>8. Tombol WhatsApp</h2>
+  <div class="grid g2">
+    <div class="box"><span class="label">Terang</span><button class="wa-btn" aria-label="Hubungi lewat WhatsApp, +62 812"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>+62 812-xxxx-xxxx</button></div>
+    <div class="box" style="background:#15211A;border-color:#3A4D40"><span class="label" style="color:#A9B8AD">Gelap (kontras teks putih)</span><button class="wa-btn" style="background:#2E8B4E;color:#fff" aria-label="Hubungi lewat WhatsApp, +62 812"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>+62 812-xxxx-xxxx</button></div>
+  </div>
+  <p class="hint">Klik membuka dialog "Lanjutkan ke WhatsApp?" lalu wa.me di tab baru.</p>
+
+  <h2>9. Banner, toast, tab, dan bintang</h2>
+  <div class="grid g2">
+    <div class="box" style="display:grid;gap:14px">
+      <div class="banner">Kamu sudah memiliki satu iklan aktif. Iklan baru bisa dibuat setelah iklan ini berakhir atau ditarik.</div>
+      <div><span class="toast">Tersalin</span></div>
+      <div class="rate" aria-label="Rating 4 dari 5"><span>★</span><span>★</span><span>★</span><span>★</span><span class="off">★</span></div>
+    </div>
+    <div class="box">
+      <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true">Jelajah Tempat</button><button class="tab" role="tab" aria-selected="false">Berita</button><button class="tab" role="tab" aria-selected="false">Catatan</button><button class="tab" role="tab" aria-selected="false">Sumber</button></div>
+      <p class="hint" style="margin-top:12px">Tab aktif memakai garis emas. Tab dibaca dari query (?tab=).</p>
+    </div>
+  </div>
+
+  <h2>10. Onboarding (desain akhir)</h2>
+  <div class="grid g2">
+    <div>
+      <span class="label">Langkah 1: umur, konten di tengah</span>
+      <div class="onboard">
+        <div class="back"><button class="btn btn-icon" aria-label="Kembali" disabled style="opacity:.3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+        <h3 style="font-size:24px">Berapa umurmu?</h3>
+        <p class="t-small" style="margin:8px 0 16px">Umur 13 sampai 30 tahun.</p>
+        <div class="field" style="width:200px"><input class="input" type="number" min="13" max="30" value="16" aria-label="Umur"></div>
+        <button class="btn btn-primary">Lanjut</button>
+        <div class="steps"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+    </div>
+    <div>
+      <span class="label">Langkah 2: satu kartu peran sesuai umur</span>
+      <div class="onboard">
+        <div class="back"><button class="btn btn-icon" aria-label="Kembali"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+        <div class="role sel" style="text-align:left;max-width:320px;width:100%">
+          <h3 style="font-size:20px">Pelajar</h3>
+          <span class="t-small">13 sampai 17 tahun</span>
+          <ul class="t-small"><li>Tersedia: Wasiat, Pustaka, Peta, Dampak</li><li>Tidak tersedia: UMKM Dibantu, Guyub Acara, WhatsApp</li></ul>
+        </div>
+        <button class="btn btn-primary" style="margin-top:16px">Pilih</button>
+        <div class="steps"><span class="dot"></span><span class="dot on"></span><span class="dot"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>11. Sketsa tata letak</h2>
+  <p class="lead">Sketsa awal, belum final. Dipakai untuk menentukan posisi, bukan tampilan akhir.</p>
+  <div class="grid g2">
+    <div>
+      <span class="label">Dashboard Penggerak (desktop)</span>
+      <div class="sketch wf">
+        <div class="wf-bar">Logo · Peta · UMKM · Acara · Pesan · Iklan · [currency] · Profil</div>
+        <div class="wf-row">
+          <div class="wf-block" style="min-height:160px">Daftar kartu permintaan<br>filter kabupaten di atas</div>
+          <div class="wf-block" style="min-height:160px">Peta Jawa Tengah<br>(seluruh wilayah, tidak zoom)</div>
+        </div>
+        <div class="wf-block wf-x">Slot Sorotan (hanya Penggerak dan Admin, setelah konten utama)</div>
+      </div>
+    </div>
+    <div>
+      <span class="label">Profil (desktop)</span>
+      <div class="sketch wf">
+        <div class="wf-bar">Navbar</div>
+        <div class="wf-row">
+          <div class="wf-block" style="min-height:160px">Foto + pensil<br>Nama (maks 20)<br>Nomor WA (opsional)<br>Tombol WA</div>
+          <div class="wf-block" style="min-height:160px">Bio dan catatan<br>(form edit di samping, tanpa scroll)</div>
+        </div>
+        <div class="wf-block">Tampilan: Bingkai (inventory), Iklan saya</div>
+      </div>
+    </div>
+    <div>
+      <span class="label">Toko bingkai (menu dari badge)</span>
+      <div class="sketch wf">
+        <div class="wf-block">Bingkai 1 · pratinjau · 50 · [Beli]</div>
+        <div class="wf-block">Bingkai 2 · pratinjau · 150 · [Dimiliki]</div>
+        <div class="wf-block wf-x">Currency belum cukup (tombol nonaktif)</div>
+      </div>
+    </div>
+    <div>
+      <span class="label">Mobile (dua kolom menjadi satu)</span>
+      <div class="sketch wf" style="max-width:240px">
+        <div class="wf-bar">☰ Guyub</div>
+        <div class="wf-block" style="min-height:90px">Kartu</div>
+        <div class="wf-block" style="min-height:90px">Kartu</div>
+        <div class="wf-block wf-x">Tombol mengambang: kembali ke atas</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>12. Animasi</h2>
+  <div class="grid g3">
+    <div class="box"><span class="label">Masuk (rise)</span><div class="anim-rise t-small" style="padding:14px;background:var(--cream);border-radius:8px">Kartu muncul 0,6 detik</div></div>
+    <div class="box"><span class="label">Indikator aktif (pulse)</span><div style="display:flex;justify-content:center;padding:12px"><span class="dot on anim-pulse" style="width:14px;height:14px"></span></div></div>
+    <div class="box"><span class="label">Aturan</span><p class="t-small" style="margin:0">Durasi 0,2 sampai 0,6 detik. Nonaktif jika pengguna memilih gerak berkurang (prefers-reduced-motion).</p></div>
+  </div>
+  <button class="btn btn-secondary replay" onclick="document.querySelectorAll('.anim-rise,.anim-pulse').forEach(e=>{e.style.animation='none';e.offsetHeight;e.style.animation=''})">Putar ulang animasi</button>
+</div>
+
+<script>
+const btn=document.getElementById('themeBtn');
+const modes=['otomatis','terang','gelap'];let i=0;
+btn.addEventListener('click',()=>{ i=(i+1)%3; const m=modes[i];
+  btn.textContent='Tema: '+m;
+  if(m==='otomatis') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', m==='terang'?'light':'dark');
+});
+</script>
+</body>
+</html>
